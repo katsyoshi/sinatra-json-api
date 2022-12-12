@@ -16,4 +16,6 @@ end
 
 get "/name" do
   User.find_by!(name: params["user_name"], published: true).to_json
+rescue ActiveRecord::RecordNotFound
+  { error: "unknown user_name" }.to_json
 end
